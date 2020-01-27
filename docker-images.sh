@@ -57,13 +57,13 @@ if [ $BUILD ];
     echo '#                 BUILDING CONTAINER IMAGES                #'
     echo '############################################################'
     docker build -t orderer:latest orderer/
-    docker build -t insurance-peer:latest insurancePeer/
-    docker build -t police-peer:latest policePeer/
-    docker build -t shop-peer:latest shopPeer/
-    docker build -t repairshop-peer:latest repairShopPeer/
+    docker build -t bank-peer:latest bankPeer/
+    docker build -t govt-peer:latest govtPeer/
+    docker build -t user-peer:latest userPeer/
+    docker build -t passport-peer:latest repairShopPeer/
     docker build -t web:latest web/
-    docker build -t insurance-ca:latest insuranceCA/
-    docker build -t police-ca:latest policeCA/
-    docker build -t shop-ca:latest shopCA/
-    docker build -t repairshop-ca:latest repairShopCA/
+    docker build -t bank-ca:latest bankCA/
+    docker build -t govt-ca:latest govtCA/
+    docker build -t user-ca:latest userCA/
+    docker build -t passport-ca:latest repairShopCA/
 fi

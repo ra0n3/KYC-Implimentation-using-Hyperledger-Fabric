@@ -15,63 +15,63 @@ $PROJPATH/cryptogen generate --config=$PROJPATH/crypto-config.yaml --output=$CLI
 
 sh generate-cfgtx.sh
 
-rm -rf $PROJPATH/{orderer,insurancePeer,policePeer,repairShopPeer,shopPeer}/crypto
-mkdir $PROJPATH/{orderer,insurancePeer,policePeer,repairShopPeer,shopPeer}/crypto
+rm -rf $PROJPATH/{orderer,bankPeer,govtPeer,passportPeer,userPeer}/crypto
+mkdir $PROJPATH/{orderer,bankPeer,govtPeer,passportPeer,userPeer}/crypto
 cp -r $ORDERERS/orderer-org/orderers/orderer0/{msp,tls} $PROJPATH/orderer/crypto
-cp -r $PEERS/insurance-org/peers/insurance-peer/{msp,tls} $PROJPATH/insurancePeer/crypto
-cp -r $PEERS/police-org/peers/police-peer/{msp,tls} $PROJPATH/policePeer/crypto
-cp -r $PEERS/repairshop-org/peers/repairshop-peer/{msp,tls} $PROJPATH/repairShopPeer/crypto
-cp -r $PEERS/shop-org/peers/shop-peer/{msp,tls} $PROJPATH/shopPeer/crypto
+cp -r $PEERS/bank-org/peers/bank-peer/{msp,tls} $PROJPATH/bankPeer/crypto
+cp -r $PEERS/govt-org/peers/govt-peer/{msp,tls} $PROJPATH/govtPeer/crypto
+cp -r $PEERS/passport-org/peers/passport-peer/{msp,tls} $PROJPATH/passportPeer/crypto
+cp -r $PEERS/user-org/peers/user-peer/{msp,tls} $PROJPATH/userPeer/crypto
 cp $CLIPATH/genesis.block $PROJPATH/orderer/crypto/
 
-INSURANCECAPATH=$PROJPATH/insuranceCA
-POLICECAPATH=$PROJPATH/policeCA
-REPAIRSHOPCAPATH=$PROJPATH/repairShopCA
-SHOPCAPATH=$PROJPATH/shopCA
+BANKCAPATH=$PROJPATH/bankCA
+GOVTCAPATH=$PROJPATH/govtCA
+PASSPORTCAPATH=$PROJPATH/passportCA
+USERCAPATH=$PROJPATH/userCA
 
-rm -rf {$INSURANCECAPATH,$POLICECAPATH,$REPAIRSHOPCAPATH,$SHOPCAPATH}/{ca,tls}
-mkdir -p {$INSURANCECAPATH,$POLICECAPATH,$REPAIRSHOPCAPATH,$SHOPCAPATH}/{ca,tls}
-cp $PEERS/insurance-org/ca/* $INSURANCECAPATH/ca
-cp $PEERS/insurance-org/tlsca/* $INSURANCECAPATH/tls
-mv $INSURANCECAPATH/ca/*_sk $INSURANCECAPATH/ca/key.pem
-mv $INSURANCECAPATH/ca/*-cert.pem $INSURANCECAPATH/ca/cert.pem
-mv $INSURANCECAPATH/tls/*_sk $INSURANCECAPATH/tls/key.pem
-mv $INSURANCECAPATH/tls/*-cert.pem $INSURANCECAPATH/tls/cert.pem
+rm -rf {$BANKCAPATH,$GOVTCAPATH,$PASSPORTCAPATH,$USERCAPATH}/{ca,tls}
+mkdir -p {$BANKCAPATH,$GOVTCAPATH,$PASSPORTCAPATH,$USERCAPATH}/{ca,tls}
+cp $PEERS/bank-org/ca/* $BANKCAPATH/ca
+cp $PEERS/bank-org/tlsca/* $BANKCAPATH/tls
+mv $BANKCAPATH/ca/*_sk $BANKCAPATH/ca/key.pem
+mv $BANKCAPATH/ca/*-cert.pem $BANKCAPATH/ca/cert.pem
+mv $BANKCAPATH/tls/*_sk $BANKCAPATH/tls/key.pem
+mv $BANKCAPATH/tls/*-cert.pem $BANKCAPATH/tls/cert.pem
 
-cp $PEERS/police-org/ca/* $POLICECAPATH/ca
-cp $PEERS/police-org/tlsca/* $POLICECAPATH/tls
-mv $POLICECAPATH/ca/*_sk $POLICECAPATH/ca/key.pem
-mv $POLICECAPATH/ca/*-cert.pem $POLICECAPATH/ca/cert.pem
-mv $POLICECAPATH/tls/*_sk $POLICECAPATH/tls/key.pem
-mv $POLICECAPATH/tls/*-cert.pem $POLICECAPATH/tls/cert.pem
+cp $PEERS/govt-org/ca/* $GOVTCAPATH/ca
+cp $PEERS/govt-org/tlsca/* $GOVTCAPATH/tls
+mv $GOVTCAPATH/ca/*_sk $GOVTCAPATH/ca/key.pem
+mv $GOVTCAPATH/ca/*-cert.pem $GOVTCAPATH/ca/cert.pem
+mv $GOVTCAPATH/tls/*_sk $GOVTCAPATH/tls/key.pem
+mv $GOVTCAPATH/tls/*-cert.pem $GOVTCAPATH/tls/cert.pem
 
-cp $PEERS/repairshop-org/ca/* $REPAIRSHOPCAPATH/ca
-cp $PEERS/repairshop-org/tlsca/* $REPAIRSHOPCAPATH/tls
-mv $REPAIRSHOPCAPATH/ca/*_sk $REPAIRSHOPCAPATH/ca/key.pem
-mv $REPAIRSHOPCAPATH/ca/*-cert.pem $REPAIRSHOPCAPATH/ca/cert.pem
-mv $REPAIRSHOPCAPATH/tls/*_sk $REPAIRSHOPCAPATH/tls/key.pem
-mv $REPAIRSHOPCAPATH/tls/*-cert.pem $REPAIRSHOPCAPATH/tls/cert.pem
+cp $PEERS/passport-org/ca/* $PASSPORTCAPATH/ca
+cp $PEERS/passport-org/tlsca/* $PASSPORTCAPATH/tls
+mv $PASSPORTCAPATH/ca/*_sk $PASSPORTCAPATH/ca/key.pem
+mv $PASSPORTCAPATH/ca/*-cert.pem $PASSPORTCAPATH/ca/cert.pem
+mv $PASSPORTCAPATH/tls/*_sk $PASSPORTCAPATH/tls/key.pem
+mv $PASSPORTCAPATH/tls/*-cert.pem $PASSPORTCAPATH/tls/cert.pem
 
-cp $PEERS/shop-org/ca/* $SHOPCAPATH/ca
-cp $PEERS/shop-org/tlsca/* $SHOPCAPATH/tls
-mv $SHOPCAPATH/ca/*_sk $SHOPCAPATH/ca/key.pem
-mv $SHOPCAPATH/ca/*-cert.pem $SHOPCAPATH/ca/cert.pem
-mv $SHOPCAPATH/tls/*_sk $SHOPCAPATH/tls/key.pem
-mv $SHOPCAPATH/tls/*-cert.pem $SHOPCAPATH/tls/cert.pem
+cp $PEERS/user-org/ca/* $USERCAPATH/ca
+cp $PEERS/user-org/tlsca/* $USERCAPATH/tls
+mv $USERCAPATH/ca/*_sk $USERCAPATH/ca/key.pem
+mv $USERCAPATH/ca/*-cert.pem $USERCAPATH/ca/cert.pem
+mv $USERCAPATH/tls/*_sk $USERCAPATH/tls/key.pem
+mv $USERCAPATH/tls/*-cert.pem $USERCAPATH/tls/cert.pem
 
 WEBCERTS=$PROJPATH/web/certs
 rm -rf $WEBCERTS
 mkdir -p $WEBCERTS
 cp $PROJPATH/orderer/crypto/tls/ca.crt $WEBCERTS/ordererOrg.pem
-cp $PROJPATH/insurancePeer/crypto/tls/ca.crt $WEBCERTS/insuranceOrg.pem
-cp $PROJPATH/policePeer/crypto/tls/ca.crt $WEBCERTS/policeOrg.pem
-cp $PROJPATH/repairShopPeer/crypto/tls/ca.crt $WEBCERTS/repairShopOrg.pem
-cp $PROJPATH/shopPeer/crypto/tls/ca.crt $WEBCERTS/shopOrg.pem
-cp $PEERS/insurance-org/users/Admin@insurance-org/msp/keystore/* $WEBCERTS/Admin@insurance-org-key.pem
-cp $PEERS/insurance-org/users/Admin@insurance-org/msp/signcerts/* $WEBCERTS/
-cp $PEERS/shop-org/users/Admin@shop-org/msp/keystore/* $WEBCERTS/Admin@shop-org-key.pem
-cp $PEERS/shop-org/users/Admin@shop-org/msp/signcerts/* $WEBCERTS/
-cp $PEERS/police-org/users/Admin@police-org/msp/keystore/* $WEBCERTS/Admin@police-org-key.pem
-cp $PEERS/police-org/users/Admin@police-org/msp/signcerts/* $WEBCERTS/
-cp $PEERS/repairshop-org/users/Admin@repairshop-org/msp/keystore/* $WEBCERTS/Admin@repairshop-org-key.pem
-cp $PEERS/repairshop-org/users/Admin@repairshop-org/msp/signcerts/* $WEBCERTS/
+cp $PROJPATH/bankPeer/crypto/tls/ca.crt $WEBCERTS/bankOrg.pem
+cp $PROJPATH/govtPeer/crypto/tls/ca.crt $WEBCERTS/govtOrg.pem
+cp $PROJPATH/passportPeer/crypto/tls/ca.crt $WEBCERTS/passportOrg.pem
+cp $PROJPATH/userPeer/crypto/tls/ca.crt $WEBCERTS/userOrg.pem
+cp $PEERS/bank-org/users/Admin@bank-org/msp/keystore/* $WEBCERTS/Admin@bank-org-key.pem
+cp $PEERS/bank-org/users/Admin@bank-org/msp/signcerts/* $WEBCERTS/
+cp $PEERS/user-org/users/Admin@user-org/msp/keystore/* $WEBCERTS/Admin@user-org-key.pem
+cp $PEERS/user-org/users/Admin@user-org/msp/signcerts/* $WEBCERTS/
+cp $PEERS/govt-org/users/Admin@govt-org/msp/keystore/* $WEBCERTS/Admin@govt-org-key.pem
+cp $PEERS/govt-org/users/Admin@govt-org/msp/signcerts/* $WEBCERTS/
+cp $PEERS/passport-org/users/Admin@passport-org/msp/keystore/* $WEBCERTS/Admin@passport-org-key.pem
+cp $PEERS/passport-org/users/Admin@passport-org/msp/signcerts/* $WEBCERTS/
