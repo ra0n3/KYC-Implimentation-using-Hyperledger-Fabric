@@ -9,33 +9,33 @@ let status = 'down';
 let statusChangedCallbacks = [];
 
 // Setup clients per organization
-const insuranceClient = new OrganizationClient(
+const bankClient = new OrganizationClient(
   config.channelName,
   config.orderer0,
-  config.insuranceOrg.peer,
-  config.insuranceOrg.ca,
-  config.insuranceOrg.admin
+  config.bankOrg.peer,
+  config.bankOrg.ca,
+  config.bankOrg.admin
 );
-const shopClient = new OrganizationClient(
+const userClient = new OrganizationClient(
   config.channelName,
   config.orderer0,
-  config.shopOrg.peer,
-  config.shopOrg.ca,
-  config.shopOrg.admin
+  config.userOrg.peer,
+  config.userOrg.ca,
+  config.userOrg.admin
 );
-const repairShopClient = new OrganizationClient(
+const passportClient = new OrganizationClient(
   config.channelName,
   config.orderer0,
-  config.repairShopOrg.peer,
-  config.repairShopOrg.ca,
-  config.repairShopOrg.admin
+  config.passportOrg.peer,
+  config.passportOrg.ca,
+  config.passportOrg.admin
 );
-const policeClient = new OrganizationClient(
+const govtClient = new OrganizationClient(
   config.channelName,
   config.orderer0,
-  config.policeOrg.peer,
-  config.policeOrg.ca,
-  config.policeOrg.admin
+  config.govtOrg.peer,
+  config.govtOrg.ca,
+  config.govtOrg.admin
 );
 
 function setStatus(s) {
@@ -64,10 +64,10 @@ export function isReady() {
 
 function getAdminOrgs() {
   return Promise.all([
-    insuranceClient.getOrgAdmin(),
-    shopClient.getOrgAdmin(),
-    repairShopClient.getOrgAdmin(),
-    policeClient.getOrgAdmin()
+    bankClient.getOrgAdmin(),
+    userClient.getOrgAdmin(),
+    passportClient.getOrgAdmin(),
+    govtClient.getOrgAdmin()
   ]);
 }
 
@@ -75,10 +75,10 @@ function getAdminOrgs() {
   // Login
   try {
     await Promise.all([
-      insuranceClient.login(),
-      shopClient.login(),
-      repairShopClient.login(),
-      policeClient.login()
+      bankClient.login(),
+      userClient.login(),
+      passportClient.login(),
+      govtClient.login()
     ]);
   } catch (e) {
     console.log('Fatal error logging into blockchain organization clients!');
@@ -89,18 +89,18 @@ function getAdminOrgs() {
   // Bootstrap blockchain network
   try {
     await getAdminOrgs();
-    if (!(await insuranceClient.checkChannelMembership())) {
+    if (!(await bankClient.checkChannelMembership())) {
       console.log('Default channel not found, attempting creation...');
       const createChannelResponse =
-        await insuranceClient.createChannel(config.channelConfig);
+        await bankClient.createChannel(config.channelConfig);
       if (createChannelResponse.status === 'SUCCESS') {
         console.log('Successfully created a new default channel.');
         console.log('Joining peers to the default channel.');
         await Promise.all([
-          insuranceClient.joinChannel(),
-          shopClient.joinChannel(),
-          repairShopClient.joinChannel(),
-          policeClient.joinChannel()
+          bankClient.joinChannel(),
+          userClient.joinChannel(),
+          passportClient.joinChannel(),
+          govtClient.joinChannel()
         ]);
         // Wait for 10s for the peers to join the newly created channel
         await new Promise(resolve => {
@@ -117,10 +117,10 @@ function getAdminOrgs() {
   // Register block events
   try {
     console.log('Connecting and Registering Block Events');
-    insuranceClient.connectAndRegisterBlockEvent();
-    shopClient.connectAndRegisterBlockEvent();
-    repairShopClient.connectAndRegisterBlockEvent();
-    policeClient.connectAndRegisterBlockEvent();
+    bankClient.connectAndRegisterBlockEvent();
+    userClient.connectAndRegisterBlockEvent();
+    passportClient.connectAndRegisterBlockEvent();
+    govtClient.connectAndRegisterBlockEvent();
   } catch (e) {
   console.log('Fatal error register block event!');
   console.log(e);
@@ -130,10 +130,10 @@ function getAdminOrgs() {
   // Initialize network
   try {
     await Promise.all([
-      insuranceClient.initialize(),
-      shopClient.initialize(),
-      repairShopClient.initialize(),
-      policeClient.initialize()
+      bankClient.initialize(),
+      userClient.initialize(),
+      passportClient.initialize(),
+      govtClient.initialize()
     ]);
   } catch (e) {
     console.log('Fatal error initializing blockchain organization clients!');
@@ -142,17 +142,17 @@ function getAdminOrgs() {
   }
 
   // Install chaincode on all peers
-  let installedOnInsuranceOrg, installedOnShopOrg, installedOnRepairShopOrg,
-    installedOnPoliceOrg;
+  let installedOnBankOrg, installedOnUserOrg, installedOnPassportOrg,
+    installedOnGovtOrg;
   try {
     await getAdminOrgs();
-    installedOnInsuranceOrg = await insuranceClient.checkInstalled(
+    installedOnBankOrg = await bankClient.checkInstalled(
       config.chaincodeId, config.chaincodeVersion, config.chaincodePath);
-    installedOnShopOrg = await shopClient.checkInstalled(
+    installedOnUserOrg = await userClient.checkInstalled(
       config.chaincodeId, config.chaincodeVersion, config.chaincodePath);
-    installedOnRepairShopOrg = await repairShopClient.checkInstalled(
+    installedOnPassportOrg = await passportClient.checkInstalled(
       config.chaincodeId, config.chaincodeVersion, config.chaincodePath);
-    installedOnPoliceOrg = await policeClient.checkInstalled(
+    installedOnGovtOrg = await govtClient.checkInstalled(
       config.chaincodeId, config.chaincodeVersion, config.chaincodePath);
   } catch (e) {
     console.log('Fatal error getting installation status of the chaincode!');
@@ -160,8 +160,8 @@ function getAdminOrgs() {
     process.exit(-1);
   }
 
-  if (!(installedOnInsuranceOrg && installedOnShopOrg &&
-    installedOnRepairShopOrg && installedOnPoliceOrg)) {
+  if (!(installedOnBankOrg && installedOnUserOrg &&
+    installedOnPassportOrg && installedOnGovtOrg)) {
     console.log('Chaincode is not installed, attempting installation...');
 
     // Pull chaincode environment base image
@@ -211,13 +211,13 @@ function getAdminOrgs() {
 
     // Install chaincode
     const installationPromises = [
-      insuranceClient.install(
+      bankClient.install(
         config.chaincodeId, config.chaincodeVersion, config.chaincodePath),
-      shopClient.install(
+      userClient.install(
         config.chaincodeId, config.chaincodeVersion, config.chaincodePath),
-      repairShopClient.install(
+      passportClient.install(
         config.chaincodeId, config.chaincodeVersion, config.chaincodePath),
-      policeClient.install(
+      govtClient.install(
         config.chaincodeId, config.chaincodeVersion, config.chaincodePath)
     ];
     try {
@@ -234,7 +234,7 @@ function getAdminOrgs() {
     // Instantiating the chaincode on a single peer should be enough (for now)
     try {
       // Initial contract types
-      await insuranceClient.instantiate(config.chaincodeId,
+      await bankClient.instantiate(config.chaincodeId,
         config.chaincodeVersion, DEFAULT_CONTRACT_TYPES);
       console.log('Successfully instantiated chaincode on all peers.');
       setStatus('ready');
@@ -251,8 +251,8 @@ function getAdminOrgs() {
 
 // Export organization clients
 export {
-  insuranceClient,
-  shopClient,
-  repairShopClient,
-  policeClient
+  bankClient,
+  userClient,
+  passportClient,
+  govtClient
 };

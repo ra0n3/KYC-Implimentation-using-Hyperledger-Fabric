@@ -4,6 +4,8 @@ CHANNEL_NAME="default"
 PROJPATH=$(pwd)
 CLIPATH=$PROJPATH/cli/peers
 
+chmod +x $PROJPATH/configtxgen
+
 echo
 echo "##########################################################"
 echo "#########  Generating Orderer Genesis block ##############"

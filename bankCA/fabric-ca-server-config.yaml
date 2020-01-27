@@ -9,7 +9,7 @@ tls:
     certfiles:
 
 ca:
-  name: insurance-org
+  name: bank-org
   keyfile: ./ca/key.pem
   certfile: ./ca/cert.pem
   chainfile: ./ca/cert.pem

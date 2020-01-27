@@ -2,7 +2,7 @@
 
 import config from './config';
 import { wrapError, marshalArgs } from './utils';
-import { insuranceClient as client, isReady } from './setup';
+import { bankClient as client, isReady } from './setup';
 import uuidV4 from 'uuid/v4';
 
 import network from './invoke';

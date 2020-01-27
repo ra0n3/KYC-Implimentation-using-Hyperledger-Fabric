@@ -10,79 +10,79 @@ const config = {
   channelName: 'default',
   channelConfig: readFileSync(resolve(__dirname, '../../channel.tx')),
   chaincodeId: 'bcins',
-  chaincodeVersion: 'v2',
+  chaincodeVersion: 'v0',
   chaincodePath: 'bcins',
   orderer0: {
     hostname: 'orderer0',
     url: 'grpcs://orderer0:7050',
     pem: readCryptoFile('ordererOrg.pem')
   },
-  insuranceOrg: {
+  bankOrg: {
     peer: {
-      hostname: 'insurance-peer',
-      url: 'grpcs://insurance-peer:7051',
-      eventHubUrl: 'grpcs://insurance-peer:7053',
-      pem: readCryptoFile('insuranceOrg.pem')
+      hostname: 'bank-peer',
+      url: 'grpcs://bank-peer:7051',
+      eventHubUrl: 'grpcs://bank-peer:7053',
+      pem: readCryptoFile('bankOrg.pem')
     },
     ca: {
-      hostname: 'insurance-ca',
-      url: 'https://insurance-ca:7054',
-      mspId: 'InsuranceOrgMSP'
+      hostname: 'bank-ca',
+      url: 'https://bank-ca:7054',
+      mspId: 'BankOrgMSP'
     },
     admin: {
-      key: readCryptoFile('Admin@insurance-org-key.pem'),
-      cert: readCryptoFile('Admin@insurance-org-cert.pem')
+      key: readCryptoFile('Admin@bank-org-key.pem'),
+      cert: readCryptoFile('Admin@bank-org-cert.pem')
     }
   },
-  policeOrg: {
+  govtOrg: {
     peer: {
-      hostname: 'police-peer',
-      url: 'grpcs://police-peer:7051',
-      eventHubUrl: 'grpcs://police-peer:7053',
-      pem: readCryptoFile('policeOrg.pem')
+      hostname: 'govt-peer',
+      url: 'grpcs://govt-peer:7051',
+      eventHubUrl: 'grpcs://govt-peer:7053',
+      pem: readCryptoFile('govtOrg.pem')
     },
     ca: {
-      hostname: 'police-ca',
-      url: 'https://police-ca:7054',
-      mspId: 'PoliceOrgMSP'
+      hostname: 'govt-ca',
+      url: 'https://govt-ca:7054',
+      mspId: 'GovtOrgMSP'
     },
     admin: {
-      key: readCryptoFile('Admin@police-org-key.pem'),
-      cert: readCryptoFile('Admin@police-org-cert.pem')
+      key: readCryptoFile('Admin@govt-org-key.pem'),
+      cert: readCryptoFile('Admin@govt-org-cert.pem')
     }
   },
-  shopOrg: {
+  userOrg: {
     peer: {
-      hostname: 'shop-peer',
-      url: 'grpcs://shop-peer:7051',
-      eventHubUrl: 'grpcs://shop-peer:7053',
-      pem: readCryptoFile('shopOrg.pem')
+      hostname: 'user-peer',
+      url: 'grpcs://user-peer:7051',
+      eventHubUrl: 'grpcs://user-peer:7053',
+      pem: readCryptoFile('userOrg.pem')
     },
     ca: {
-      hostname: 'shop-ca',
-      url: 'https://shop-ca:7054',
-      mspId: 'ShopOrgMSP'
+      hostname: 'user-ca',
+      url: 'https://user-ca:7054',
+      mspId: 'UserOrgMSP'
     },
     admin: {
-      key: readCryptoFile('Admin@shop-org-key.pem'),
-      cert: readCryptoFile('Admin@shop-org-cert.pem')
+      key: readCryptoFile('Admin@user-org-key.pem'),
+      cert: readCryptoFile('Admin@user-org-cert.pem')
     }
   },
-  repairShopOrg: {
+  passportOrg: {
     peer: {
-      hostname: 'repairshop-peer',
-      url: 'grpcs://repairshop-peer:7051',
-      pem: readCryptoFile('repairShopOrg.pem'),
-      eventHubUrl: 'grpcs://repairshop-peer:7053',
+      hostname: 'passport-peer',
+      url: 'grpcs://passport-peer:7051',
+      pem: readCryptoFile('passportOrg.pem'),
+      eventHubUrl: 'grpcs://passport-peer:7053',
     },
     ca: {
-      hostname: 'repairshop-ca',
-      url: 'https://repairshop-ca:7054',
-      mspId: 'RepairShopOrgMSP'
+      hostname: 'passport-ca',
+      url: 'https://passport-ca:7054',
+      mspId: 'PassportOrgMSP'
     },
     admin: {
-      key: readCryptoFile('Admin@repairshop-org-key.pem'),
-      cert: readCryptoFile('Admin@repairshop-org-cert.pem')
+      key: readCryptoFile('Admin@passport-org-key.pem'),
+      cert: readCryptoFile('Admin@passport-org-cert.pem')
     }
   }
 };
@@ -90,20 +90,20 @@ const config = {
 if (process.env.LOCALCONFIG) {
   config.orderer0.url = 'grpcs://localhost:7050';
 
-  config.insuranceOrg.peer.url = 'grpcs://localhost:7051';
-  config.shopOrg.peer.url = 'grpcs://localhost:8051';
-  config.repairShopOrg.peer.url = 'grpcs://localhost:9051';
-  config.policeOrg.peer.url = 'grpcs://localhost:10051';
+  config.bankOrg.peer.url = 'grpcs://localhost:7051';
+  config.userOrg.peer.url = 'grpcs://localhost:8051';
+  config.passportOrg.peer.url = 'grpcs://localhost:9051';
+  config.govtOrg.peer.url = 'grpcs://localhost:10051';
 
-  config.insuranceOrg.peer.eventHubUrl = 'grpcs://localhost:7053';
-  config.shopOrg.peer.eventHubUrl = 'grpcs://localhost:8053';
-  config.repairShopOrg.peer.eventHubUrl = 'grpcs://localhost:9053';
-  config.policeOrg.peer.eventHubUrl = 'grpcs://localhost:10053';
+  config.bankOrg.peer.eventHubUrl = 'grpcs://localhost:7053';
+  config.userOrg.peer.eventHubUrl = 'grpcs://localhost:8053';
+  config.passportOrg.peer.eventHubUrl = 'grpcs://localhost:9053';
+  config.govtOrg.peer.eventHubUrl = 'grpcs://localhost:10053';
 
-  config.insuranceOrg.ca.url = 'https://localhost:7054';
-  config.shopOrg.ca.url = 'https://localhost:8054';
-  config.repairShopOrg.ca.url = 'https://localhost:9054';
-  config.policeOrg.ca.url = 'https://localhost:10054';
+  config.bankOrg.ca.url = 'https://localhost:7054';
+  config.userOrg.ca.url = 'https://localhost:8054';
+  config.passportOrg.ca.url = 'https://localhost:9054';
+  config.govtOrg.ca.url = 'https://localhost:10054';
 }
 
 export default config;

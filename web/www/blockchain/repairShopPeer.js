@@ -2,7 +2,7 @@
 
 import config from './config';
 import { wrapError } from './utils';
-import { repairShopClient as client, isReady } from './setup';
+import { passportClient as client, isReady } from './setup';
 
 import network from './invoke';
 

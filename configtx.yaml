@@ -30,28 +30,28 @@ Organizations:
 - &BankOrg
   Name: BankOrgMSP
   ID: BankOrgMSP
-  MSPDir: cli/peers/peerOrganizations/insurance-org/msp
+  MSPDir: cli/peers/peerOrganizations/bank-org/msp
   AnchorPeers:
   - Host: insurance-peer
     Port: 7051
 - &UserOrg
   Name: UserOrgMSP
   ID: UserOrgMSP
-  MSPDir: cli/peers/peerOrganizations/shop-org/msp
+  MSPDir: cli/peers/peerOrganizations/user-org/msp
   AnchorPeers:
   - Host: shop-peer
     Port: 7051
 - &PassportOrg
   Name: PassportOrgMSP
   ID: PassportOrgMSP
-  MSPDir: cli/peers/peerOrganizations/repairshop-org/msp
+  MSPDir: cli/peers/peerOrganizations/passport-org/msp
   AnchorPeers:
   - Host: repairshop-peer
     Port: 7051
 - &GovtOrg
     Name: GovtOrgMSP
     ID: GovtOrgMSP
-    MSPDir: cli/peers/peerOrganizations/police-org/msp
+    MSPDir: cli/peers/peerOrganizations/govt-org/msp
     AnchorPeers:
     - Host: police-peer
       Port: 7051

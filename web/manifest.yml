@@ -6,6 +6,6 @@ applications:
   command: npm run serve
   memory: 512M
   buildpack: sdk-for-nodejs
-  hostname: blockchain-insurance
+  hostname: blockchain-kyc
   env:
     NODE_ENV: production

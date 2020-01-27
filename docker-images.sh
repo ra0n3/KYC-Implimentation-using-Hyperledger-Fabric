@@ -60,10 +60,10 @@ if [ $BUILD ];
     docker build -t bank-peer:latest bankPeer/
     docker build -t govt-peer:latest govtPeer/
     docker build -t user-peer:latest userPeer/
-    docker build -t passport-peer:latest repairShopPeer/
+    docker build -t passport-peer:latest passportPeer/
     docker build -t web:latest web/
     docker build -t bank-ca:latest bankCA/
     docker build -t govt-ca:latest govtCA/
     docker build -t user-ca:latest userCA/
-    docker build -t passport-ca:latest repairShopCA/
+    docker build -t passport-ca:latest passportCA/
 fi

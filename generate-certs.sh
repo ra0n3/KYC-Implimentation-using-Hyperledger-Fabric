@@ -10,6 +10,8 @@ CLIPATH=$PROJPATH/cli/peers
 ORDERERS=$CLIPATH/ordererOrganizations
 PEERS=$CLIPATH/peerOrganizations
 
+chmod +x $PROJPATH/cryptogen
+
 rm -rf $CLIPATH
 $PROJPATH/cryptogen generate --config=$PROJPATH/crypto-config.yaml --output=$CLIPATH
 

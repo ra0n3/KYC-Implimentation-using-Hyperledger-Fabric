@@ -2,7 +2,7 @@
 
 import config from './config';
 import { wrapError, marshalArgs } from './utils';
-import { policeClient as client, isReady } from './setup';
+import { govtClient as client, isReady } from './setup';
 
 import network from './invoke';
 
