@@ -3,11 +3,11 @@
   "description": "Network on IBP v2",
   "version": "1.0.0",
   "client": {
-      "organization": "insurance"
+      "organization": "bank"
   },
   "organizations": {
-      "insurance": {
-          "mspid": "insurance",
+      "bank": {
+          "mspid": "bank",
           "peers": [
               "124b79efa8f544fc940408394edac7b5-peer9dce22.horea-blockchain-32x32xp.us-south.containers.appdomain.cloud:7051"
           ],
@@ -15,20 +15,20 @@
               "124b79efa8f544fc940408394edac7b5-ca081cbf.horea-blockchain-32x32xp.us-south.containers.appdomain.cloud:7054"
           ]
       },
-      "policemsp": {
-          "mspid": "policemsp",
+      "govtmsp": {
+          "mspid": "govtmsp",
           "peers": [
               "124b79efa8f544fc940408394edac7b5-peer3e4cea.horea-blockchain-32x32xp.us-south.containers.appdomain.cloud:7051"
           ]
       },
-      "repairmsp": {
-          "mspid": "repairmsp",
+      "passportmsp": {
+          "mspid": "passportmsp",
           "peers": [
               "124b79efa8f544fc940408394edac7b5-peer6671ce.horea-blockchain-32x32xp.us-south.containers.appdomain.cloud:7051"
           ]
       },
-      "shopmsp": {
-          "mspid": "shopmsp",
+      "usermsp": {
+          "mspid": "usermsp",
           "peers": [
               "124b79efa8f544fc940408394edac7b5-peerbe9312.horea-blockchain-32x32xp.us-south.containers.appdomain.cloud:7051"
           ]

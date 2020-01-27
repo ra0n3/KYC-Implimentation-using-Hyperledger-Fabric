@@ -66,7 +66,7 @@ services:
     - CORE_PEER_ID=bank-peer
     - CORE_PEER_ADDRESS=bank-peer:7051
     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=bank-peer:7051
-    - CORE_PEER_LOCALMSPID=InsuranceOrgMSP
+    - CORE_PEER_LOCALMSPID=BankOrgMSP
     ports:
     - 7051:7051
     - 7053:7053
@@ -83,7 +83,7 @@ services:
     - CORE_PEER_ID=user-peer
     - CORE_PEER_ADDRESS=user-peer:7051
     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=user-peer:7051
-    - CORE_PEER_LOCALMSPID=ShopOrgMSP
+    - CORE_PEER_LOCALMSPID=UserOrgMSP
     ports:
     - 8051:7051
     - 8053:7053
@@ -101,7 +101,7 @@ services:
     - CORE_PEER_ID=passport-peer
     - CORE_PEER_ADDRESS=passport-peer:7051
     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=passport-peer:7051
-    - CORE_PEER_LOCALMSPID=RepairShopOrgMSP
+    - CORE_PEER_LOCALMSPID=PassportOrgMSP
     ports:
     - 9051:7051
     - 9053:7053
@@ -120,7 +120,7 @@ services:
     - CORE_PEER_ID=govt-peer
     - CORE_PEER_ADDRESS=govt-peer:7051
     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=govt-peer:7051
-    - CORE_PEER_LOCALMSPID=PoliceOrgMSP
+    - CORE_PEER_LOCALMSPID=GovtOrgMSP
     ports:
     - 10051:7051
     - 10053:7053
