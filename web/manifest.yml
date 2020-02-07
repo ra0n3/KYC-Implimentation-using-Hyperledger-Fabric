@@ -4,7 +4,7 @@ applications:
 - name: blockchain-demo
   path: .
   command: npm run serve
-  memory: 512M
+  memory: 1G
   buildpack: sdk-for-nodejs
   hostname: blockchain-kyc
   env:
